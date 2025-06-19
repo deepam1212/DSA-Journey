@@ -115,3 +115,134 @@ class Person {
         return Person(name: self.name, address: copiedAddress)
     }
 }
+/*
+ Searching in a LinkedList
+ */
+class ListNode {
+    var val: Int
+    var next: ListNode?
+    
+    init(val: Int, next: ListNode? = nil) {
+        self.val = val
+        self.next = next
+    }
+}
+
+func searchLinkedList(head: ListNode?) -> Bool {
+    var temp = head
+    while(temp != nil) {
+        if temp?.val == 21 {
+            return true
+        } else {
+            temp = temp?.next
+        }
+    }
+    return false
+}
+//let newNode1 = ListNode(val: 1)
+//let newNode2 = ListNode(val: 2)
+//let newNode3 = ListNode(val: 3)
+//let newNode4 = ListNode(val: 4)
+//newNode1.next = newNode2
+//newNode2.next = newNode3
+//newNode3.next = newNode4
+//
+//searchLinkedList(head: newNode1)
+// MARK: - Insert in kth Index
+// MARK: - Head -> Index 0 Node -> Index 1 Node -> Index 2 Node.....
+
+// There is no concept of indexes inside a LinkedList, We are writing this because of our convienience
+
+func insertNodeAtKthIndex(head: inout ListNode?, valueToInsert: Int, k: Int) -> ListNode? {
+    let newNode = ListNode(val: valueToInsert)
+    if k == 0 {
+        newNode.next = head
+        return newNode
+    }
+    var currentNode = head
+    var index: Int = 0
+    
+    while(currentNode != nil && index < k - 1) {
+        currentNode = currentNode?.next
+        index += 1
+    }
+    
+    if currentNode == nil {
+        return head
+    }
+    
+    newNode.next = currentNode?.next
+    currentNode?.next = newNode
+    
+    
+    return head
+    
+}
+
+var newNode1: ListNode? = ListNode(val: 1)
+let newNode2: ListNode? = ListNode(val: 2)
+let newNode3: ListNode? = ListNode(val: 3)
+let newNode4: ListNode? = ListNode(val: 4)
+newNode1?.next = newNode2
+newNode2?.next = newNode3
+newNode3?.next = newNode4
+
+//insertNodeAtKthIndex(head: &newNode1, valueToInsert: 100, k: 2)
+
+func deletionOfNode(head: inout ListNode?, valueToDelete: Int) -> ListNode? {
+    if head?.val == valueToDelete {
+        head = head?.next
+        return head
+    }
+    
+    var current = head
+    while(current?.next != nil) {
+        if current?.next?.val == valueToDelete {
+            current?.next = current?.next?.next
+        } else {
+            current = current?.next
+        }
+    }
+    
+    return head
+}
+let node = deletionOfNode(head: &newNode1, valueToDelete: 5)
+print(node?.val)
+print(node?.next?.val)
+print(node?.next?.next?.val)
+// Reverse LinkedList
+func reverseLnkedList(head: inout ListNode?) -> ListNode? {
+    var previous: ListNode? = nil
+    var current = head// 1,2,3,4
+    
+    while(current != nil) {
+        let nextNode = current?.next//2,3
+        current?.next = previous//nil,1
+        previous = current//1,
+        print("Previous Node", previous?.val ?? 0)
+        print("Previous Next Node", previous?.next?.val ?? 0)
+        current = nextNode//2,
+    }
+    
+    return previous
+}
+reverseLnkedList(head: &newNode1)
+//MARK: - Deep copying a LinkedList, We can do it using hashmap or dictionary
+func deepCopyOfLinkedList(head: inout ListNode?) -> ListNode? {
+    var originalNode: ListNode? = head
+    var copyNode: ListNode? = head
+    
+    while(originalNode != nil) {
+        let newNode = ListNode(val: originalNode?.val ?? 0)
+        copyNode?.next = newNode
+        copyNode = copyNode?.next
+        originalNode = originalNode?.next
+    }
+    
+    return copyNode
+}
+/* Example: let say we have a LinkedList 1 -> 2 -> 3 -> 4 which are stored on random address
+
+and we have to create a linkedlist which is same of the above linkedlist but of different address,
+ Answer: We will be using Deep Copy for this, As in Shallow Copy the address of the Nodes of the LinkedList are same but in Deep Copy the Address of the LinkedList are different
+ */
