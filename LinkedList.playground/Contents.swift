@@ -246,3 +246,8 @@ func deepCopyOfLinkedList(head: inout ListNode?) -> ListNode? {
 and we have to create a linkedlist which is same of the above linkedlist but of different address,
  Answer: We will be using Deep Copy for this, As in Shallow Copy the address of the Nodes of the LinkedList are same but in Deep Copy the Address of the LinkedList are different
  */
+func rotateRight(_ head: ListNode?, _ k: Int) -> ListNode? {
+    var currentList = head
+    
+    return nil
+}
