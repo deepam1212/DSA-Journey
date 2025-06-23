@@ -122,7 +122,7 @@ printAllSubArray()
  [3,0,1,2,3], minimum = 0, maximum = 3, length = [3,0], i.e. 2
  */
 func findMinMaxSubArray() -> [Int] {
-    var arr: [Int] = [2,2,6,4,5,1,5,2,6,4,1,1,6]
+    var arr: [Int] = [2,2,6,4,5,1,5,2,6,4,1]
     var minElement: Int = Int.max
     var maxElement: Int = Int.min
     
@@ -159,3 +159,24 @@ func findMinMaxSubArray() -> [Int] {
 }
 
 print(findMinMaxSubArray())
+//MARK: - Maximum Subarray
+
+func maxSubArray() -> Int {
+    let arr: [Int] = [-2,1,-3,4,-1,2,1,-5,4]
+    var currentSum: Int = arr[0]
+    var maxSum: Int = arr[0]
+    
+    for (index, item) in arr.enumerated() where index > 0 {
+        let newCurrentSum: Int = currentSum + item
+        if item > newCurrentSum {
+            currentSum = item
+        } else {
+            currentSum = newCurrentSum
+        }
+        if currentSum > maxSum {
+            maxSum = currentSum
+        }
+    }
+    return maxSum
+}
+maxSubArray()

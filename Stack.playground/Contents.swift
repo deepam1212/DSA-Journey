@@ -103,3 +103,73 @@ func nearestSmallerElements(_ nums: [Int]) -> [Int] {
 }
 
 print(nearestSmallerElements([4, 5, 2, 10, 8]))
+// MARK: - Implement Stack Using LinkedList
+
+/*
+ 
+ To implement a Stack we need to implement methods like push, pop, peek & the Time Complexity must be O(1)
+ 
+         Head        |       Tail
+ push    O(1)        |        O(1)
+ pop     O(1)        |        O(1)
+ peek
+ 
+ */
+// MARK: - Given String, Remove all the consecutive element, i.e. a b b c => Output: ac
+/* a b b c b b c a c x => Output => cx
+ 
+ We do the Above question using Stack
+ 
+ Stack = a b, then we have b incoming and we see the top of the stack, if both are samer then we remove the top of the stack
+*/
+func removeConsecutiveElementsinString() -> String {
+    var myString: String = "abbacx"
+    var stack: [Character] = []
+    if myString.isEmpty {
+        return ""
+    }
+    for item in myString {
+        if stack.isEmpty {
+            stack.append(item)
+        } else {
+            if stack.last == item {
+                stack.popLast()
+            } else {
+                stack.append(item)
+            }
+        }
+    }
+    
+    return String(stack)
+}
+
+print("removeConsecutiveElementsinString", removeConsecutiveElementsinString())// TC, SC: O(N)
+// MARK: - Most Important( Find the largest area of rectengle in the Bar)
+/*
+ ^
+ |
+8|--
+ |  |
+ |  |__
+ |  |  |
+ |  |  |__
+ |8 |6 |2 |
+0-------------------------------------->
+ 
+ largeat Area of Rectemgle = 16
+ 
+ We need to find the contineous Height, to find it we need to find the SubArray & in the SubArray we need to find the Minimum height of the entire SubArray
+ 
+ BF Idea:
+ Foor Every SubArray Staring from Index L and going forward to Index R, Find minimum Height (l..<h),
+ area area = H * (r - l + 1)
+ 
+ Time Complexity for BF is O(n^3) & SC: is O(1)
+ // MARK: - Note: BF Means Brute Force
+ 
+ Optimal Approach: Fix the Height of rectangle & find Width
+ 
+ We need to find the Nearest Smaller of Left of Size (N) & Nearest Smallest on Right of Size (N)
+ 
+ 
+ */
