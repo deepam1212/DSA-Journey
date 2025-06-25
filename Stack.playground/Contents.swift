@@ -173,3 +173,50 @@ print("removeConsecutiveElementsinString", removeConsecutiveElementsinString())/
  
  
  */
+ // MARK: - Google Question (Sum of Subarray Ranges)
+
+func findSubArrayRanges() -> Int {
+    var nums: [Int] = [1,2,3]
+    var result: Int = 0
+    
+    for i in 0..<nums.count {
+        var minItem = nums[i]
+        var maxItem = nums[i]
+        for j in i..<nums.count {
+            minItem = min(minItem, nums[j])
+            maxItem = max(maxItem, nums[j])
+            result += maxItem - minItem
+        }
+    }
+    
+    return result
+}
+print(findSubArrayRanges())
+
+
+func findA() -> [Int] {
+    let arr: [Int] = [5,2,8,10,6,1,7,15]// -1,-1, 1, 2, 1, -1, 5, 6
+    var stack: [Int] = []
+    var outputArr: [Int] = []
+    for (index, item) in arr.enumerated() {
+        if stack.isEmpty || index == 0 {
+            if index == 0 {
+                outputArr.append(-1)
+            }
+            stack.append(item)
+        } else {
+            while ((stack.last ?? 0) > item) {
+                stack.popLast()
+            }
+            if stack.isEmpty {
+                outputArr.append(-1)
+            } else {
+                outputArr.append(stack.last ?? -1)
+            }
+            stack.append(item)
+        }
+    }
+    
+    return outputArr
+}
+print("findA", findA())
