@@ -1,7 +1,7 @@
 /*
  // MARK: - Queue (FIFO) (First In First Out)
  
- example: Ticket Counter, Powerpoint Slides
+ example: Ticket Counter, Powerpoint Slides, Calling to a Call Center, Cold play concert in BookMyShow
  
  ____________________________________
  |
@@ -47,4 +47,69 @@ struct Queue<T> {
     }
 }
 // MARK: - For implementing a Queue we need to implement `enqueue` & `dequeue` methods
+
+// MARK: - Implementation of Queue using LinkedList
+/*
+ 
+ Always remove the Head and add from tail
+ 
+ 
+ eq 3, eq 7, eq 12, eq 8, dq, dq, eq41
+ 
+ 12, 8, 41
+ 
+ 
+ */
+
+// MARK: - How to implement Queue using Stack
+// Queue has 2 end & Stack has only one end, so we need 2 stack to implement a Queue
+/*
+ 📦 Stack (LIFO – Last In, First Out)
+ 🔹 Behavior:
+ You insert and remove items from one end only – called the top.
+
+ Like a stack of plates: you can only take the top plate.
+ 
+ 🚪 Queue (FIFO – First In, First Out)
+ 🔹 Behavior:
+ You insert at one end (rear) and remove from the other (front).
+
+ Like a line of people at a ticket counter.
+ */
+struct QueueUsingStacks<T> {
+    private var inStack: [T] = []
+    private var outStack: [T] = []
+
+    mutating func enqueue(_ value: T) {
+        inStack.append(value)
+    }
+
+    mutating func dequeue() -> T? {
+        if outStack.isEmpty {
+            while let element = inStack.popLast() {
+                outStack.append(element)
+            }
+        }
+        return outStack.popLast()
+    }
+
+    var front: T? {
+        if outStack.isEmpty {
+            return inStack.first
+        }
+        return outStack.last
+    }
+
+    var isEmpty: Bool {
+        return inStack.isEmpty && outStack.isEmpty
+    }
+}
+// New Data Structure Deque (Stack + Queue), T.C. O(1)
+// Remove from front/ back
+// Insertion from front/ back
+// Access from front/ back
+
+
+
+
 
