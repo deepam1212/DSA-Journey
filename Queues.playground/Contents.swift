@@ -109,6 +109,11 @@ struct QueueUsingStacks<T> {
 // Insertion from front/ back
 // Access from front/ back
 
+// MARK: - Most Important (All FAANG) Sliding Window Maximum
+// Find maximum of every SUbArray k size K
+// [3,2,3,4,5,5,4,5,6], k = 4
+// [0-3] index, answer = 4
+// [1-4], answer = 5 ...
 
 
 
