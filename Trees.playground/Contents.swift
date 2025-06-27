@@ -2,6 +2,7 @@
 
 
 // Binary Tree - Every Node has atmax 2 Children (0,1,2)
+// MARK: - Real World Programming Scenarios like (Folder Structure)
 
 // MARK: - Height in a Binary Tree
 /*
@@ -105,5 +106,100 @@ D   E   F     <-- Depth 2
 
  This is not a complete binary tree as the right part is filled first
  
+ 3. Perfect Binary Tree: All Nodes have 2 children except leaf nodes and all the leaf nodes must be at the same level
+ 
+ 
+ // MARK: - A Perfect Binary Tree is a complete and Proper Binary Tree
+ 
+ 
+ // MARK: - Binary Tree Traversal
+ 
+ 1. Pre Order Traversal
+ 2. In order Traversal
+ 3. Post Order Traversal
+ 
+ 
+ // MARK: - 1. Pre Order Traversal (Node  -> Left -> Right)
+ 
+ 
+    1               Level 1
+   / \
+  2   3             Level 2
+     /
+    6               Level 3
+
+ Node -> Left -> Right
+ 
+ 1 -> 2 -> 3 -> 6
+
+ 
+ 
+ 
+ example of Pre order traversal is of reorder(rootNode: Tree?) function, as we are using recursing, whenever the root node is nil, we will be returning from the function, and for all the Left & the right Node we will use recursion
  */
+
+class Tree {
+    var value: Int?
+    var leftNode: Tree?
+    var rightNode: Tree?
+    
+    init(value: Int? = nil, leftNode: Tree? = nil, rightNode: Tree? = nil) {
+        self.value = value
+        self.leftNode = leftNode
+        self.rightNode = rightNode
+    }
+    
+    func reorder(rootNode: Tree?) {
+        if rootNode == nil {
+            return
+        }
+        print(rootNode?.value ?? 0)
+        reorder(rootNode: rootNode?.leftNode)
+        reorder(rootNode: rootNode?.rightNode)
+    }
+}
+
+let rootNode: Tree = Tree(value: 0)
+rootNode.leftNode = Tree(value: 1)
+rootNode.leftNode?.leftNode = Tree(value: 11)
+rootNode.leftNode?.rightNode = Tree(value: 12)
+rootNode.rightNode = Tree(value: 2)
+rootNode.reorder(rootNode: rootNode)
+// MARK: - T.C. of this Traversal is O(N), as there are N Nodes in this Traversal
+
+/*
+// MARK: - 2. In-Order Traversal (L N R)
+ 
+
+ 
+        1               Level 1
+       / \
+      2   3             Level 2
+     / \   \
+    4   5   6           Level 3
+       /   / \
+      7   8   9         Level 4
+ 
+ Left -> Node -> Right
+ 
+ 4 -> 2 -> 7 -> 5 -> 1 -> 3 -> 8 -> 6 -> 9
+ */
+
+// MARK: - 3. Post Order Traversal (Left -> Right -> Node)
+/*
+        1               Level 1
+       / \
+      2   3             Level 2
+     / \   \
+    4   5   6           Level 3
+       /   / \
+      7   8   9         Level 4
+
+ 4 -> 7 -> 5 -> 2 -> 8 -> 9 -> 6 -> 3 -> 1
+ 
+ 
+ */
+
+
+
 
