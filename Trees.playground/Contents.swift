@@ -85,8 +85,8 @@ D   E   F     <-- Depth 2
         1
        / \
       2   3
-     / \ / \
-    4   5 6  7
+     / \
+    4   5
 
 2. Complete Binary Tree (All levels are filled except possibly the Last Level which is filled left to right)
  
@@ -107,7 +107,12 @@ D   E   F     <-- Depth 2
  This is not a complete binary tree as the right part is filled first
  
  3. Perfect Binary Tree: All Nodes have 2 children except leaf nodes and all the leaf nodes must be at the same level
- 
+        1
+       / \
+      2   3
+     / \   \
+    4   5 6  7
+
  
  // MARK: - A Perfect Binary Tree is a complete and Proper Binary Tree
  
@@ -153,9 +158,9 @@ class Tree {
         if rootNode == nil {
             return
         }
-        print(rootNode?.value ?? 0)
-        reorder(rootNode: rootNode?.leftNode)
-        reorder(rootNode: rootNode?.rightNode)
+        print(rootNode?.value ?? 0)// Node
+        reorder(rootNode: rootNode?.leftNode)// Left
+        reorder(rootNode: rootNode?.rightNode) // Right
     }
 }
 
@@ -200,6 +205,29 @@ rootNode.reorder(rootNode: rootNode)
  
  */
 
+// MARK: - Iterative InOrder
+// Normally we use recursion, but iterative means using a stack instead of function calls.
 
 
+// MARK: - Level Order Traversal
+/*
+ Print all the Nodes in all the Levels
+ 
+        1               Level 1
+       / \
+      2   3             Level 2
+     / \   \
+    4   5   6           Level 3
+       /   / \
+      7   8   9         Level 4
 
+ 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
+ 
+ 
+ Print all the Nodes in Level 0
+ Print all the Nodes in Level 1
+ Print all the Nodes in Level 2 and so and so
+ 
+ 
+ 
+ */
