@@ -227,7 +227,17 @@ rootNode.reorder(rootNode: rootNode)
  Print all the Nodes in Level 0
  Print all the Nodes in Level 1
  Print all the Nodes in Level 2 and so and so
- 
- 
- 
  */
+class LevelOrderBinaryTree {
+    var value: Int?
+    var leftNode: LevelOrderBinaryTree?
+    var rightNode: LevelOrderBinaryTree?
+    
+    init(value: Int? = nil, leftNode: LevelOrderBinaryTree? = nil, rightNode: LevelOrderBinaryTree? = nil) {
+        self.value = value
+        self.leftNode = leftNode
+        self.rightNode = rightNode
+    }
+}
+// We can use Queue Data Structure in Level Order Traversal as it follows the FIFO Rule
+
