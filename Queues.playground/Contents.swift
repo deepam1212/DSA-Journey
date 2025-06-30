@@ -118,3 +118,37 @@ struct QueueUsingStacks<T> {
 
 
 
+let dict: [Int: [Int]] = [:]
+for item in dict {
+    let value = (item.value.last ?? 0) - (item.value.first ?? 0)
+}
+
+func findShortestSubArray(_ nums: [Int]) -> Int {
+    var frequencyDict: [Int: [Int]] = [:]
+    for (index, item) in nums.enumerated() {
+        if var myValue = frequencyDict[item], !myValue.isEmpty {
+            myValue.append(index)
+            frequencyDict[item] = myValue
+        } else {
+            frequencyDict[item] = [index]
+        }
+    }
+    //
+    var minimumSize: Int = Int.max
+    var maximumValue: Int = 1
+    //
+    for item in frequencyDict {
+        if item.value.count == 1 {
+            continue
+        }
+        print("item.value", item.value)
+        print("maximumValue", maximumValue)
+        //
+        if item.value.count > maximumValue {
+            maximumValue = item.value.count
+            minimumSize = min(minimumSize, (item.value.last ?? 0) - (item.value.first ?? 0) + 1)
+        }
+    }
+    return minimumSize
+}
+print(findShortestSubArray([1,2,2,3,1,4,2]))
