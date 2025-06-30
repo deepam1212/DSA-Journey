@@ -43,4 +43,43 @@ func findElementInBST() {
 
 // MARK: - Insertion in BST
 
+// MARK: - Most Difficult (Deletion in a BST)
+ // MARK: - Construct a BST from Sorted Array
+/*
+ var : [Int] = [-1, 3, 4, 6, 7, 8, 10, 13, 14]
+ */
+class TreeNode {
+    var val: Int?
+    var leftNode: TreeNode?
+    var rightNode: TreeNode?
+    
+    init(val: Int? = nil, leftNode: TreeNode? = nil, rightNode: TreeNode? = nil) {
+        self.val = val
+        self.leftNode = leftNode
+        self.rightNode = rightNode
+    }
+}
+/*
+ 
+ 
+ */
+
+func constructBstFromSortedArr(nums: [Int]) -> TreeNode? {
+    func buildTree(start: Int, end: Int) -> TreeNode? {
+        if start > end {
+            return nil// Edge Case
+        }
+        //
+        let mid = (start + end) / 2
+        var rootNode: TreeNode = TreeNode(val: nums[mid])
+        rootNode.leftNode = buildTree(start: 0, end: mid - 1)
+        rootNode.rightNode = buildTree(start: mid + 1, end: end)
+        return rootNode
+    }
+    return buildTree(start: 0, end: nums.count - 1)
+}
+print("constructBstFromSortedArr", constructBstFromSortedArr(nums: [-1, 3, 4, 6, 7, 8, 10, 13, 14])?.val)
+// MARK: - Microsoft Question (Given Binary Tree is a BST or Not)
+
+// MARK: - Inorder Traversal of BST is always Sorted (Inorder LNR)
 
