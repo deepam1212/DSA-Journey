@@ -220,3 +220,80 @@ func findA() -> [Int] {
     return outputArr
 }
 print("findA", findA())
+func findMaxAverage(_ nums: [Int], _ k: Int) -> Double {
+     //
+     if nums.count == k && k == 1 {
+         return Double(nums[0])
+     }
+     //
+     var maxAverage: Double = 0.0
+     //
+     for index in 0..<k {
+         maxAverage += Double(nums[index]) / Double(k)
+         print("maxAverage", maxAverage)
+     }
+     //
+     var myAverage = maxAverage
+     //
+     for index in k..<nums.count {
+         myAverage -= Double(Double(nums[index - k]) / Double(k))
+         myAverage += Double(Double(nums[index]) / Double(k))
+
+         maxAverage = max(maxAverage, myAverage)
+     }
+     //
+     return maxAverage
+ }
+findMaxAverage([4,0,4,3,3], 5)
+
+
+    func maxFreeTime(_ eventTime: Int, _ k: Int, _ startTime: [Int], _ endTime: [Int]) -> Int {
+        let n = startTime.count
+        var intervals = [(Int, Int)]()
+        for i in 0..<n {
+            intervals.append((startTime[i], endTime[i]))
+        }
+
+        intervals.sort { $0.1 < $1.1 }
+
+        func canAttend(_ gap: Int) -> Bool {
+            var count = 0
+            var lastEnd = -1_000_000_000
+            for (s, e) in intervals {
+                if s >= lastEnd + gap {
+                    count += 1
+                    lastEnd = e
+                    if count >= k {
+                        return true
+                    }
+                }
+            }
+            return false
+        }
+
+        if k == 1 {
+            // If only 1 meeting is selected, return the maximum duration of any meeting
+            var maxDuration = 0
+            for i in 0..<n {
+                maxDuration = max(maxDuration, endTime[i] - startTime[i])
+            }
+            return maxDuration
+        }
+
+        var low = 0, high = eventTime, ans = 0
+        while low <= high {
+            let mid = (low + high) / 2
+            if canAttend(mid) {
+                ans = mid
+                low = mid + 1
+            } else {
+                high = mid - 1
+            }
+        }
+        return ans
+    }
+
+
+
+
+print(maxFreeTime(5, 1, [1,3], [2,5]))
