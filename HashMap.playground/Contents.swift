@@ -91,3 +91,55 @@ struct DiamondModal {
 }
 
 var arrDiamond: [DiamondModal] = []
+
+func checkUnique() {
+    let arr: [Int] = [1,1,2,3,4,5]
+    var set: Set<Int> = []
+    for item in arr {
+        set.insert(item)
+    }
+    print(set)
+}
+
+checkUnique()
+// MARK: - Set dont maintain the orders
+/*
+ // MARK: - Length of the Longest Substring with Repeating
+
+ Input: "abcabcbb"
+ Output: 3
+ 
+ Input: "AaaA"
+ OUtput: 2
+ 
+ Input: "bbbb"
+ Output: 1
+ 
+ Input: "pwwkew"
+ Output: 3
+ */
+func lengthOfSubString(str: String) {
+    //
+    var start = str.startIndex
+    var end = start
+    var seen: Set<Character> = []
+    var maxLength: Int = 0
+    //
+    while(end < str.endIndex) {
+        let char = str[end]
+        //
+        if !seen.contains(char) {
+            seen.insert(char)
+            let size = str.distance(from: start, to: end) + 1
+            print("size", size)
+            maxLength = max(maxLength, size)
+            end = str.index(after: end)
+        } else {
+            seen.remove(str[start])
+            start = str.index(after: start)
+        }
+    }
+    //
+    print("MaxLength is : \(maxLength)")
+}
+lengthOfSubString(str: "abcabcbb")
