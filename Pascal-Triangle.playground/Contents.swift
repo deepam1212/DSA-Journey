@@ -80,8 +80,28 @@ func countFactorsUpToN(_ N: Int) -> [Int] {
 }
 // MARK: - Question Givena Sorted Array A and an Int K, Find pair (i, j) such that Ai + Aj == k ** i != j
 
-
-
-
-
-
+func kThSmallestElement() {
+    let arr = [10, 5, 8, 6, 7, 9]
+    let k: Int = 3
+    //
+    var heap: [Int] = []
+    //
+    for item in arr {
+        if heap.isEmpty {
+            heap.append(item)
+        } else {
+            if item > (heap.last ?? 0) {
+                heap.append(item)
+            } else if item < heap.first ?? 0 {
+                heap.insert(item, at: 0)
+            }
+            //
+            if heap.count > k {
+                heap.removeLast()
+            }
+        }
+    }
+    //
+    print(heap.last ?? 0)
+}
+kThSmallestElement()
