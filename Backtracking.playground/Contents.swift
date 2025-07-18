@@ -41,5 +41,45 @@ print(generateParenthesis(2))
  arr = [1,2,3,4,5]
 SubSequence can be this [1,2,4] but can not be [2,3,1] because 1 is coming earlier in main array and it is not maintaining order
  
+ | Aspect         | Subset                  | Subsequence              |
+ | -------------- | ----------------------- | ------------------------ |
+ | Order matters? | ❌ No                   | ✅ Yes                   |
+ | Rearrangement  | Allowed                 | Not allowed              |
+ | Derived from   | Any combination         | Original order only      |
+ | Example valid  | \[3, 1] from \[1, 2, 3] | ❌ Not valid subsequence |
  
+ // MARK: - Question Generate all SubSets of the given arr[]
+                                Output
+ A[] = [5   8]         |        [] [5] [8] [5,8]/ [8,5]
+ 
+ 
+ Q: print all sub set for [7,9,4]
+ 
+// MARK: - Solution
  */
+func subsets(_ nums: [Int]) -> [[Int]] {
+    var result = [[Int]]()
+    var current = [Int]()
+
+    func backtrack(_ start: Int) {
+        print("Adding subset:", current)
+        result.append(current)
+
+        for i in start..<nums.count {
+            print("Choose", nums[i])
+            current.append(nums[i])       // Choose
+            backtrack(i + 1)              // Explore
+            print("Backtrack, remove", current.last!)
+            current.removeLast()          // Un-choose (Backtrack)
+        }
+    }
+
+    backtrack(0)
+    return result
+}
+
+let subsetsResult = subsets([1, 2])
+print("\nAll subsets:", subsetsResult)
+
+
+
