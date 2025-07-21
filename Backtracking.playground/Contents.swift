@@ -83,3 +83,83 @@ print("\nAll subsets:", subsetsResult)
 
 
 
+// MARK: - Question (Print Path in a Stair Case)
+/*
+ A = 2
+          ____
+          |
+     _____|
+     |
+ ____|
+ 
+    [
+        [1,1]
+        ,
+        [2]
+    ]// Either we can take 1-1 steps or 2 steps at the same time
+ 
+ For A = 3
+    [
+        [1,1,1],
+        [1,2],
+        [2,1]
+    ]
+ */
+func printPaths(_ n: Int) -> [[Int]] {
+    var result = [[Int]]()
+    
+    func backtrack(_ path: [Int], _ remaining: Int) {
+        if remaining == 0 {
+            result.append(path)
+            return
+        }
+        if remaining >= 1 {
+            backtrack(path + [1], remaining - 1)
+        }
+        if remaining >= 2 {
+            backtrack(path + [2], remaining - 2)
+        }
+    }
+    
+    backtrack([], n)
+    return result
+}
+// MARK: - A Single Function call is making 2 function calls for me
+
+// MARK: - Question Print all paths from Source to Destination
+/*
+ S
+ ____________
+ |    |     |
+ |    |     |
+ |----|-----|
+ |    |     |
+ |____|_____|
+    ----One more block here        D
+ 
+ Paths are [[Down, Down, Right], [Right, Down, Down], [Down, Right, Down]]
+ */
+func printAllPaths() {
+    var result: [[String]] = []
+    //
+    func travel(row: Int, col: Int, path: [String]) {
+        if row == 2 && col == 1 {
+            result.append(path)
+            return
+        }
+        
+        if row + 1 <= 2 {
+            travel(row: row + 1, col: col, path: path + ["Down"])
+        }
+        if col + 1 <= 1 {
+            travel(row: row, col: col + 1, path: path + ["Right"])
+        }
+    }
+    //
+    travel(row: 0, col: 0, path: [])
+    //
+    print(result)
+}
+
+printAllPaths()
+
